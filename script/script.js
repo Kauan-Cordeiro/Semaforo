@@ -48,6 +48,6 @@ window.onclick = function(event) {
     }
 }
 
-setInterval(carregarImagem, 2000);
+setInterval(carregarImagem, 60000);
 
 window.onload = carregarImagem;

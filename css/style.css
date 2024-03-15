@@ -1,5 +1,4 @@
-body,
-html {
+body, html {
     margin: 0;
     padding: 0;
 }
@@ -20,8 +19,7 @@ nav {
 
 nav h1 {
     margin: 0;
-    font-size: 36px;
-    letter-spacing: 2px;
+    font-size: 24px; 
 }
 
 .container {
@@ -38,4 +36,14 @@ nav h1 {
     margin: 0 auto;
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 768px) {
+    nav h1 {
+        font-size: 20px; 
+    }
+
+    .container {
+        padding: 20px; 
+    }
 }
