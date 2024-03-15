@@ -21,6 +21,8 @@ function carregarImagem() {
                 const imageContainer = document.getElementById('imageContainer');
                 imageContainer.innerHTML = '';
                 imageContainer.appendChild(imagem);
+
+                som();
             } else {
                 console.error('Erro ao carregar imagem da API.');
             }
@@ -41,6 +43,13 @@ function fecharExplicacao() {
     document.getElementById('modal').style.display = 'none';
 }
 
+function som(){
+    const audio = new Audio('sing/discord-notification.mp3')
+    audio.onended = function() {
+    };
+    audio.play();
+}
+
 window.onclick = function(event) {
     const modal = document.getElementById('modal');
     if (event.target == modal) {
@@ -49,5 +58,4 @@ window.onclick = function(event) {
 }
 
 setInterval(carregarImagem, 60000);
-
 window.onload = carregarImagem;
