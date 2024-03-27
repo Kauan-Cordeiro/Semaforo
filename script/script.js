@@ -43,10 +43,9 @@ function fecharExplicacao() {
     document.getElementById('modal').style.display = 'none';
 }
 
-function som(){
-    const audio = new Audio('sing/discord-notification.mp3')
-    audio.onended = function() {
-    };
+function som() {
+    const audio = new Audio('sing/discord-notification.mp3');
+    audio.onended = function() {};
     audio.play();
 }
 
@@ -57,5 +56,47 @@ window.onclick = function(event) {
     }
 }
 
+function carregarDashboardTransito() {
+    fetch('https://niloweb.com.br/transit-room/api/reg_endpoint_all.php')
+        .then(response => response.json())
+        .then(data => {
+            const trafficDashboard = document.getElementById('trafficDashboard');
+            trafficDashboard.innerHTML = '';
+
+            if (data.length > 0) {
+                const table = document.createElement('table');
+                const headerRow = document.createElement('tr');
+                const headers = ['ID', 'Status', 'Horário'];
+                
+                headers.forEach(headerText => {
+                    const header = document.createElement('th');
+                    header.textContent = headerText;
+                    headerRow.appendChild(header);
+                });
+                table.appendChild(headerRow);
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    Object.values(item).forEach(value => {
+                        const cell = document.createElement('td');
+                        cell.textContent = value;
+                        row.appendChild(cell);
+                    });
+                    table.appendChild(row);
+                });
+
+                trafficDashboard.appendChild(table);
+            } else {
+                trafficDashboard.textContent = 'Não há informações de trânsito disponíveis.';
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao conectar à API:', error);
+        });
+}
+
 setInterval(carregarImagem, 60000);
-window.onload = carregarImagem;
+window.onload = function() {
+    carregarImagem();
+    carregarDashboardTransito();
+};
